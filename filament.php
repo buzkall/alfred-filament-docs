@@ -11,9 +11,9 @@ require __DIR__ . '/functions.php';
 $query = $argv[1];
 
 $workflow = new Workflow;
-$algolia = Algolia::create('BH4D9OD16A', '3a6f5ec59e023f465d3526ca02af8404');
+$algolia = Algolia::create('LMIKXMDI4P', '1e3d12b0b9c3a4db16cd896e83b9efa0');
 
-AlgoliaUserAgent::addCustomUserAgent('Filament Alfred Workflow', '3.0.0');
+AlgoliaUserAgent::addCustomUserAgent('Filament Alfred Workflow', '4.0.0');
 
 $results = getResults($algolia, 'filamentadmin', $query);
 
