@@ -11,13 +11,13 @@ Adapted from [TailwindCSS Docs Workflow for Alfred](https://github.com/clnt/alfr
 
 > **macOS Monterey:** PHP is no longer shipped with macOS, before attempting to use this workflow ensure you have installed the php binary via Homebrew.
 
-1. [Download the latest version](https://github.com/buzkall/alfred-filament-docs/releases/tag/filament3.x)
+1. [Download the latest version](https://github.com/buzkall/alfred-filament-docs/releases/tag/filament3.x) for 3.x docs
 2. Install the workflow by double-clicking the `.alfredworkflow` file
 3. You can add the workflow to a category, then click "Import" to finish importing. You'll now see the workflow listed in the left sidebar of your Workflows preferences pane.
 
 ## Usage
 
-To search the [docs](https://filamentadmin.com/docs/2.x/admin/installation), just type `fm` followed by your search query.
+To search the [docs](https://filamentadmin.com/docs/3.x/admin/installation), just type `fm` followed by your search query.
 
 ```
 fm <query>
