@@ -4,7 +4,7 @@ An ultra-fast Filament docs search workflow for Alfred 4
 
 Adapted from [Filament Docs Workflow for Alfred](https://github.com/intrepidws/alfred-filament-docs), which is adapted from [Alfred TailwindCSS Docs](https://github.com/clnt/alfred-tailwindcss-docs), which is adopted from [Alfred VueJS Docs](https://github.com/vmitchell85/alfred-vuejs-docs), which is adapted from [Alfred Laravel Docs](https://github.com/tillkruss/alfred-laravel-docs), Thanks [Till Krüss](https://twitter.com/tillkruss)!
 
-![Screenshot](screenshot.hpg)
+![Screenshot](screenshot.jpg)
 
 ## Installation
 

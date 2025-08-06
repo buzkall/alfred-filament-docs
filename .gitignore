@@ -1,4 +1,5 @@
 composer.lock
 /vendor
 .idea
-.DS_store*.alfredworkflow
+.DS_store
+*.alfredworkflow
