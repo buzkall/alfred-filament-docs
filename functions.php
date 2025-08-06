@@ -8,15 +8,36 @@ function getResults($algolia, $indexName, $query, $version)
         $facetFilter = ['version:2.x'];
     } elseif ($version === 'v3') {
         $facetFilter = ['version:3.x'];
+    } elseif ($version === 'v4') {
+        // For v4, search without facet filters and filter by URL pattern
+        $searchParams = [
+            'query' => $query
+        ];
+        
+        $response = $algolia->searchSingleIndex($indexName, $searchParams);
+        
+        if (!empty($response['hits'])) {
+            // Filter results to only include v4.x URLs
+            $v4Results = array_filter($response['hits'], function($hit) {
+                return isset($hit['url']) && strpos($hit['url'], '/docs/4.x/') !== false;
+            });
+            
+            return array_values($v4Results);
+        }
+        
+        return [];
     } else {
         $facetFilter = ['version:4.x'];
     }
 
-    $params = ['facetFilters' => $facetFilter];
+    $searchParams = [
+        'query' => $query,
+        'facetFilters' => $facetFilter
+    ];
 
-    $index = $algolia->initIndex($indexName);
-
-    return $index->search($query, $params)['hits'];
+    $response = $algolia->searchSingleIndex($indexName, $searchParams);
+    
+    return $response['hits'] ?? [];
 }
 
 function getTitle($hit)

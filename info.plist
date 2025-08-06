@@ -62,7 +62,7 @@
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>Craig Anderson</string>
+	<string>buzkall</string>
 	<key>description</key>
 	<string>An ultra-fast Filament docs search workflow</string>
 	<key>disabled</key>
@@ -100,11 +100,11 @@
 				<string>Searching docs for "{query}"...</string>
 				<key>script</key>
 				<string>if [ -f "/opt/homebrew/bin/php" ]; then
-    /opt/homebrew/bin/php filament.php "{query}" v3
+    /opt/homebrew/bin/php filament.php "{query}" v4
 elif [ -f "/usr/local/bin/php" ]; then
-    /usr/local/bin/php filament.php "{query}" v3
+    /usr/local/bin/php filament.php "{query}" v4
 elif [ -f "/usr/bin/php" ]; then
-    /usr/bin/php filament.php "{query}" v3
+    /usr/bin/php filament.php "{query}" v4
 fi</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -318,10 +318,16 @@ fi</string>
 
 ## Usage
 
-To search the [3.x docs](https://filamentphp.com/docs/3.x/panels/installation), just type `fm` (or `fm3`) followed by your search query.
+To search the [4.x docs](https://filamentphp.com/docs/4.x/panels/installation), just type `fm` (or `fm4`) followed by your search query.
 
 ```
 fm &lt;query&gt;
+```
+
+To search the [3.x docs](https://filamentphp.com/docs/3.x/panels/installation), just type `fm3` followed by your search query.
+
+```
+fm3 &lt;query&gt;
 ```
 
 To search the [2.x docs](https://filamentphp.com/docs/2.x/admin/installation), just type `fm2` followed by your search query.
@@ -380,8 +386,8 @@ Either press `⌘Y` to Quick Look the result, or press `&lt;enter&gt;` to open i
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.0.0</string>
+	<string>3.0.0</string>
 	<key>webaddress</key>
-	<string>https://github.com/intrepidws/alfred-filament-docs</string>
+	<string>https://github.com/buzkall/alfred-filament-docs</string>
 </dict>
 </plist>
