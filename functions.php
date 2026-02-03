@@ -2,68 +2,42 @@
 
 function getResults($algolia, $indexName, $query, $version)
 {
-    if ($version === 'v1') {
-        $facetFilter = ['version:1.x'];
-    } elseif ($version === 'v2') {
-        $facetFilter = ['version:2.x'];
-    } elseif ($version === 'v3') {
-        $facetFilter = ['version:3.x'];
-    } elseif ($version === 'v4') {
-        // For v4, search without facet filters and filter by URL pattern
+    $facetFilter = match ($version) {
+        'v1' => 'version:1.x',
+        'v2' => 'version:2.x',
+        'v3' => 'version:3.x',
+        default => null,
+    };
+
+    if ($facetFilter) {
         $searchParams = [
-            'query' => $query
+            'query' => $query,
+            'facetFilters' => [$facetFilter],
         ];
-        
+
         $response = $algolia->searchSingleIndex($indexName, $searchParams);
-        
-        if (!empty($response['hits'])) {
-            // Filter results to only include v4.x URLs
-            $v4Results = array_filter($response['hits'], function($hit) {
-                return isset($hit['url']) && strpos($hit['url'], '/docs/4.x/') !== false;
-            });
-            
-            return array_values($v4Results);
-        }
-        
-        return [];
-    } else {
-        $facetFilter = ['version:4.x'];
+
+        return $response['hits'] ?? [];
     }
 
-    $searchParams = [
-        'query' => $query,
-        'facetFilters' => $facetFilter
-    ];
+    // For v4/v5, search without facet filters and filter by URL pattern
+    $urlPattern = match ($version) {
+        'v4' => '/docs/4.x/',
+        default => '/docs/5.x/',
+    };
 
-    $response = $algolia->searchSingleIndex($indexName, $searchParams);
-    
-    return $response['hits'] ?? [];
+    $response = $algolia->searchSingleIndex($indexName, ['query' => $query]);
+    $hits = $response['hits'] ?? [];
+
+    return array_values(array_filter($hits, fn($hit) => isset($hit['url']) && str_contains($hit['url'], $urlPattern)));
 }
 
-function getTitle($hit)
+function getTitle($hit): array
 {
-    if (isset($hit['hierarchy']['lvl6'])) {
-        return [$hit['hierarchy']['lvl6'], 6];
-    }
-
-    if (isset($hit['hierarchy']['lvl5'])) {
-        return [$hit['hierarchy']['lvl5'], 5];
-    }
-
-    if (isset($hit['hierarchy']['lvl4'])) {
-        return [$hit['hierarchy']['lvl4'], 4];
-    }
-
-    if (isset($hit['hierarchy']['lvl3'])) {
-        return [$hit['hierarchy']['lvl3'], 3];
-    }
-
-    if (isset($hit['hierarchy']['lvl2'])) {
-        return [$hit['hierarchy']['lvl2'], 2];
-    }
-
-    if (isset($hit['hierarchy']['lvl1'])) {
-        return [$hit['hierarchy']['lvl1'], 1];
+    for ($level = 6; $level >= 1; $level--) {
+        if (isset($hit['hierarchy']['lvl' . $level])) {
+            return [$hit['hierarchy']['lvl' . $level], $level];
+        }
     }
 
     return [null, null];
