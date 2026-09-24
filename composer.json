@@ -3,7 +3,7 @@
     "description": "An ultra-fast Filament docs search workflow for Alfred 4.",
     "version": "3.1.0",
     "keywords": ["alfred", "alfred-workflow", "filament", "filament admin", "laravel", "algolia"],
-    "homepage": "https://www.buzkall.com/",
+    "homepage": "https://arzcode.com",
     "support": {
         "source": "https://github.com/buzkall/alfred-filament-docs",
         "issues": "https://github.com/buzkall/alfred-filament-docs/issues"
